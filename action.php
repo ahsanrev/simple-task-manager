@@ -1,52 +1,45 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: PC
- * Date: 9/26/2017
- * Time: 12:26 AM
- */
-
+include 'db.php';
 if(isset($_POST["action"])){
     $output = '';
-    $connect = mysqli_connect("localhost","root","dbbl96811","weblesson");
 
     if($_POST["action"]=="Add"){
 
-        $name = mysqli_real_escape_string($connect, $_POST["name"]);
-        $address = mysqli_real_escape_string($connect, $_POST["address"]);
+        $project_title = mysqli_real_escape_string($connect, $_POST["project_title"]);
+        $task = mysqli_real_escape_string($connect, $_POST["task"]);
 
         $procedure = "
-        CREATE PROCEDURE insertUser(IN name varchar(255),address varchar(255))
+        CREATE PROCEDURE insertTask(IN project_title varchar(255),task varchar(555))
         BEGIN
-        INSERT INTO user(name,address)VALUES(name,address);
+        INSERT INTO taskmanager(project_title,task)VALUES(project_title,task);
         END;
         ";
-        if(mysqli_query($connect,"DROP PROCEDURE IF EXISTS insertUser")){
+        if(mysqli_query($connect,"DROP PROCEDURE IF EXISTS insertTask")){
             if(mysqli_query($connect,$procedure)){
-                $query = "CALL insertUser('".$name."','".$address."')";
+                $query = "CALL insertTask('".$project_title."','".$task."')";
                 mysqli_query($connect,$query);
-                echo "Data Inserted";
+               // echo "Resource Added";
             }
         }
     }
 
     if($_POST["action"]=="Edit"){
 
-        $name = mysqli_real_escape_string($connect,$_POST["name"]);
-        $address = mysqli_real_escape_string($connect,$_POST["address"]);
+        $project_title = mysqli_real_escape_string($connect,$_POST["project_title"]);
+        $task = mysqli_real_escape_string($connect,$_POST["task"]);
 
         $procedure = "
-        CREATE PROCEDURE updateUser(IN user_id int(11),  name varchar(255), address varchar(255))
+        CREATE PROCEDURE updateTask(IN user_id int(11),  project_title varchar(255), task varchar(555))
         BEGIN
-        UPDATE user SET name = name, address= address
+        UPDATE taskmanager SET project_title = project_title, task = task
         WHERE id = user_id;
         END;
         ";
-        if(mysqli_query($connect,"DROP PROCEDURE IF EXISTS updateUser")){
+        if(mysqli_query($connect,"DROP PROCEDURE IF EXISTS updateTask")){
             if(mysqli_query($connect,$procedure)){
-                $query = "CALL updateUser('".$_POST["id"]."','".$_POST["name"]."','".$_POST["address"]."')";
+                $query = "CALL updateTask('".$_POST["id"]."','".$_POST["project_title"]."','".$_POST["task"]."')";
                 mysqli_query($connect,$query);
-                echo "Data Updated";
+                //echo "Resource Updated";
             }
         }
 
@@ -55,16 +48,33 @@ if(isset($_POST["action"])){
     if($_POST["action"]=="Delete"){
 
         $procedure = "
-        CREATE PROCEDURE deleteUser(IN user_id int(11))
+        CREATE PROCEDURE deleteTask(IN user_id int(11))
         BEGIN
-        DELETE FROM user WHERE id = user_id;
+        DELETE FROM taskmanager WHERE id = user_id;
         END;
         ";
-        if(mysqli_query($connect,"DROP PROCEDURE IF EXISTS deleteUser")){
+        if(mysqli_query($connect,"DROP PROCEDURE IF EXISTS deleteTask")){
             if(mysqli_query($connect,$procedure)){
-                $query = "CALL deleteUser('".$_POST["id"]."')";
+                $query = "CALL deleteTask('".$_POST["id"]."')";
                 mysqli_query($connect,$query);
-                echo "Data Deleted";
+                //echo "Resource Deleted";
+            }
+        }
+
+    }
+    if($_POST["action"]=="complete"){
+        $procedure = "
+        CREATE PROCEDURE completeTask(IN user_id int(11), status int(11))
+        BEGIN
+        UPDATE taskmanager SET status = 1
+        WHERE id = user_id;
+        END;
+        ";
+        if(mysqli_query($connect,"DROP PROCEDURE IF EXISTS completeTask")){
+            if(mysqli_query($connect,$procedure)){
+                $query = "CALL completeTask('".$_POST["id"]."','".$_POST["status"]."')";
+                mysqli_query($connect,$query);
+                //echo "Resource Updated";
             }
         }
 
