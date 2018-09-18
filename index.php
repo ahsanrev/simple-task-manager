@@ -9,11 +9,18 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
-
+<?php 
+session_start();
+$value = $_SESSION['user_id'];
+$value1 = $_SESSION['name'];
+if($value == ""){
+	header('Location: login.php');
+}
+	?>
 <div class="container">
     <div class="row">
         <div class="col-md-5">
-            <h3>PL Team Task Creator</h3>
+            <h3>Welcome <?php echo $value1; ?> <br />PL Team Task Creator</h3>
             <label for="">Project Title</label>
             <input type="text" name="project_title" id="project_title" class="form-control">
             <br/>
@@ -243,6 +250,5 @@
 
     </script>
 </div>
-
 </body>
 </html>
