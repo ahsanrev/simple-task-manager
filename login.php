@@ -16,12 +16,12 @@
 	</div>
 	<div class="field-group">
 		<div><input type="submit" name="login" value="Login" class="form-submit-button"></span></div>
+	  <a href="signup.php">Create Account</a>  |  <a href="#">Forget Password</a>
 	</div>  
 	
 <?php
 include 'db.php';
 session_start();
-//$conn = mysqli_connect("localhost","root","","phppot_examples");
 if(!empty($_POST["login"])) {
 	$result = mysqli_query($connect,"SELECT * FROM login WHERE username='" . $_POST["username"] . "' and password = '". $_POST["password"]."'");
 	$row  = mysqli_fetch_array($result);
@@ -32,9 +32,8 @@ if(!empty($_POST["login"])) {
 	} else {
 		echo "Wrong Username & Password";
 	}
-}	?>
-
-
+}	
+?>
 </center>	
 </form>
 </body>
