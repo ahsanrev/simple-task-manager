@@ -22,6 +22,7 @@ if(isset($_POST["action"])){
             }
         }
     }
+	//Edit Procedure
     if($_POST["action"]=="Edit"){
 
         $project_title = mysqli_real_escape_string($connect,$_POST["project_title"]);
@@ -61,6 +62,7 @@ if(isset($_POST["action"])){
         }
 
     }
+    //mark task as done
     if($_POST["action"]=="complete"){
         $procedure = "
         CREATE PROCEDURE completeTask(IN user_id int(11), status int(11))
