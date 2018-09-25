@@ -22,6 +22,7 @@ if(isset($_POST["action"])){
             }
         }
     }
+	//Edit Procedure
     if($_POST["action"]=="Edit"){
 
         $project_title = mysqli_real_escape_string($connect,$_POST["project_title"]);
