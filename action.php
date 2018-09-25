@@ -61,6 +61,7 @@ if(isset($_POST["action"])){
         }
 
     }
+    //mark task as done
     if($_POST["action"]=="complete"){
         $procedure = "
         CREATE PROCEDURE completeTask(IN user_id int(11), status int(11))
