@@ -24,7 +24,7 @@ include 'db.php';
 session_start();
 if(!empty($_POST["login"])) {
 	$result = mysqli_query($connect,"SELECT * FROM login WHERE username='" . $_POST["username"] . "' and password = '". $_POST["password"]."'");
-	$row  = mysqli_fetch_array($result);
+    $row  = mysqli_fetch_array($result);
 	if(is_array($row)) {
 	$_SESSION["user_id"] = $row['user_id'];
 	$_SESSION["name"] = $row['name'];
