@@ -32,8 +32,7 @@ if($value == ""){
         </div>
         
         <div class="col-md-7">
-            <h3>Pending Tasks <span style="float:right;"> <?php if($_GET['logout']==1) session_destroy(); ?>
-<a href="?logout=1">Logout</a> </span></h3>
+            <h3>Pending Tasks <span style="float:right;"><a href="logout.php">Logout</a> </span></h3>
             <br/>
             <div id="result" class="table-responsive">
 			
