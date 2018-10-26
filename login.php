@@ -16,7 +16,7 @@
 	</div>
 	<div class="field-group">
 		<div><input type="submit" name="login" value="Login" class="form-submit-button"></span></div>
-	  <a href="signup.php">Create Account</a>  |  <a href="#">Forget Password</a>
+	  <a href="signup.php">Create Account</a>  |  <a href="reset_pass.php">Forget Password</a>
 	</div>  
 	
 <?php
