@@ -19,15 +19,15 @@ if(isset($_POST['submit_username']) && $_POST['username'])
     // enable SMTP authentication
     $mail->SMTPAuth = true;                  
     // GMAIL username
-    $mail->Username = "purelogicsninja@gmail.com";
+    $mail->Username = "";
     // GMAIL password
-    $mail->Password = "PLS@2018";
+    $mail->Password = "";
     $mail->SMTPSecure = "ssl";  
     // sets GMAIL as the SMTP server
     $mail->Host = "smtp.gmail.com";
     // set the SMTP port for the GMAIL server
     $mail->Port = "465";
-    $mail->From='purelogicsninja@gmail.com';
+    $mail->From='';
     $mail->FromName='Password Reset';
     $mail->AddAddress('reciever_email_id', 'reciever_name');
     $mail->Subject  =  'Reset Password';
