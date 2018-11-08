@@ -8,39 +8,35 @@ if(isset($_POST['submit_username']) && $_POST['username'])
   {
     while($row=mysqli_fetch_array($select))
     {
-      $username=$row['username'];
-      $password=md5($row['password']);
-    }
+      echo $username=$row['username'];
+      echo $password=md5($row['password']);
+    exit;
+	}
     $link="<a href='localhost/tm/reset.php?key=".$username."&reset=".$password."'>Click To Reset password</a>";
-    require_once('phpmail/PHPMailerAutoload.php');
-    $mail = new PHPMailer();
-    $mail->CharSet =  "utf-8";
-    $mail->IsSMTP();
-    // enable SMTP authentication
-    $mail->SMTPAuth = true;                  
-    // GMAIL username
-    $mail->Username = "";
-    // GMAIL password
-    $mail->Password = "";
-    $mail->SMTPSecure = "ssl";  
-    // sets GMAIL as the SMTP server
-    $mail->Host = "smtp.gmail.com";
-    // set the SMTP port for the GMAIL server
-    $mail->Port = "465";
-    $mail->From='';
-    $mail->FromName='Password Reset';
-    $mail->AddAddress('reciever_email_id', 'reciever_name');
-    $mail->Subject  =  'Reset Password';
-    $mail->IsHTML(true);
-    $mail->Body    = 'Click On This Link to Reset Password '.$password.'';
-    if($mail->Send())
-    {
-      echo "Check Your Email and Click on the link sent to your email";
-    }
-    else
-    {
-      echo "Mail Error - >".$mail->ErrorInfo;
-    }
-  }	
+		require('phpmailer/class.phpmailer.php');
+		$mail = new PHPMailer();
+		$subject = "Test Mail using PHP mailer";
+		$content = "<b>This is a test mail using PHP mailer class.</b>";
+		$mail->IsSMTP();
+		$mail->SMTPDebug = 0;
+		$mail->SMTPAuth = TRUE;
+		$mail->SMTPSecure = "tls";
+		$mail->Port     = 587;  
+		$mail->Username = "your gmail username";
+		$mail->Password = "your gmail password";
+		$mail->Host     = "smtp.gmail.com";
+		$mail->Mailer   = "smtp";
+		$mail->SetFrom("vincy@phppot.com", "PHPPot");
+		$mail->AddReplyTo("vincy@phppot.com", "PHPPot");
+		$mail->AddAddress("recipient address");
+		$mail->Subject = $subject;
+		$mail->WordWrap   = 80;
+		$mail->MsgHTML($content);
+		$mail->IsHTML(true);
+if(!$mail->Send()) 
+	echo "Problem on sending mail";
+	else 
+echo "Mail sent";
+}
 }
 ?>
