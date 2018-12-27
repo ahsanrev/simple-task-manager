@@ -1,6 +1,16 @@
 <html>
 <head>
+
 <link rel="stylesheet" type="text/css" href="style/style.css">
+<?php 
+error_reporting(0);
+session_start();
+$value = $_SESSION['user_id'];
+$value1 = $_SESSION['name'];
+if($value != ""){
+	header('Location: index.php');
+}
+	?>
 </head>
 <body>
 <center>
@@ -18,8 +28,8 @@
 		<div><input type="submit" name="login" value="Login" class="form-submit-button"></span></div>
 	  <a href="signup.php">Create Account</a>  |  <a href="reset_pass.php">Forget Password</a>
 	</div>  
-	
 <?php
+
 include 'db.php';
 session_start();
 if(!empty($_POST["login"])) {

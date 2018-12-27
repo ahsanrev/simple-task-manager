@@ -2,15 +2,17 @@
 include 'db.php';
 if(isset($_POST['submit_username']) && $_POST['username'])
 {
-  $username = $_POST['username'];
-  $select = mysqli_query($connect,"select username,password from login where username='$username'");
-  if(mysqli_fetch_array($select)==1)
+	$username = $_POST['username'];
+
+	$select = mysqli_query($connect,"select username,password from login where username='$username'");
+	if(mysqli_fetch_array($select)> 1)
   {
-    while($row=mysqli_fetch_array($select))
+	while($row=mysqli_fetch_array($select))
     {
-      echo $username=$row['username'];
-      echo $password=md5($row['password']);
-    exit;
+	  printf($row);
+       echo $username=$row['username'];
+       echo $password=md5($row['password']);
+
 	}
     $link="<a href='localhost/tm/reset.php?key=".$username."&reset=".$password."'>Click To Reset password</a>";
 		require('phpmailer/class.phpmailer.php');

@@ -47,11 +47,11 @@ if($value == ""){
 			
 			
             </div>
-
         </div>
     </div>
 <script>
         //show
+		
         $(document).ready(function () {
             fetchUser();
             function fetchUser() {
@@ -65,6 +65,7 @@ if($value == ""){
                         $('#task').val('');
                         $('#actionComp').text("Add");
                         $('#resultcomp').html(data);
+						
                     }
                 })
             }
@@ -84,6 +85,7 @@ if($value == ""){
                         success:function (data) {
                             //alert(data);
                             fetchUser();
+							
                         }
                     })
 
